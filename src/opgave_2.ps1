@@ -1,7 +1,7 @@
-[CmdletBindig()]
+
 param (
-    [Parameter(HelpMessage = "Et navn", Mandatory = $true)]
+    [Parameter()]
     [string]
-    $Navn
+    $navn = Frode
 )
-Write-Host "...$Navn!"
+Write-Host "Hei $navn"
