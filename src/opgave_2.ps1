@@ -2,9 +2,9 @@ param (
     [Parameter()]
     [string]
     $navn = "Frode",
-    [Parameter(Mandatory = $true)]
+    [Parameter()]
     [string]
-    $lokasjon    
+    $lokasjon ="Stange" 
 )
 
 Write-Host "Hei $navn, som kommer fra $lokasjon"
