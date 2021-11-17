@@ -1,7 +1,10 @@
-
 param (
     [Parameter()]
     [string]
-    $navn = Frode
+    $navn = "Frode",
+    [Parameter(Mandatory = $true)]
+    [string]
+    $lokasjon    
 )
-Write-Host "Hei $navn"
+
+Write-Host "Hei $navn, som kommer fra $lokasjon"
