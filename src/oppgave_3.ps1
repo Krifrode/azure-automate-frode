@@ -1,3 +1,4 @@
+#Oppdatert221121 med komentarer
 $Url = "http://nav-deckofcards.herokuapp.com/shuffle"
 #lese inn i pwsh - invoke web req
 $response = Invoke-WebRequest -Uri $Url
