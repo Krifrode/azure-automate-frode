@@ -22,13 +22,19 @@ foreach ($card in $cards) {
  }
 
 
-
+#Returnerer kortstokk på formen CA H6 D9
 function kortstokkprint {
     param (
     [Parameter()]
     [Objekt[]]
     $cards
     )
+    $Kortstokk = @()
+    foreach ($card in $Cards) {
+        $Kortstokk += ($card.suit)[0] + $card.value 
+    }
+    $Kortstokk
+}
     #Skriver ut kortstokk
 $kortstokk = @()
 foreach ($card in $cards) {
