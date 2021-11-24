@@ -78,7 +78,12 @@ function skrivUtResultat {
 # bruker 'blackjack' som et begrep - er 21
 $blackjack = 21
 
-if ((sumPoengKortstokk -kortstokk $meg) -eq $blackjack) {
+if(((sumPoengKortstokk -kortstokk $meg) -eq $blackjack) -and ((somPoengKortstokk -korstokk $magnus) -eq $blackjack)){
+    skrivUtResultat -vinner "meg" -kortStokkMagnus $magnus -kortStokkMeg $meg
+    exit
+}
+
+elseif ((sumPoengKortstokk -kortstokk $meg) -eq $blackjack) {
     skrivUtResultat -vinner "meg" -kortStokkMagnus $magnus -kortStokkMeg $meg
     exit
 }
