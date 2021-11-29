@@ -54,7 +54,7 @@ Write-Host "Poengsum:   $sum"
 
 # 2 players and each take first cards on the deck/kortstokkJson
 # Print players hand and the rest of deck
-$Ahmad = $kortstokkJson[0..1]
+$Frode = $kortstokkJson[0..1]
 $Magnus = $kortstokkJson[2..3]
 $kortstokkJson = $kortstokkJson[4..$kortstokkJson.Length]
 
@@ -99,11 +99,11 @@ function resultsPrint {
         [object[]]
         $kortStokkMagnus,
         [object[]]
-        $kortStokkAhmad        
+        $kortStokkFrode        
         )
         Write-Output "Vinner: $vinner"
         Write-Output "magnus | $(sumPoengKortstokk -kortstokk $Magnus) | $(KortstokkPrint -kortstokkJs $Magnus)"    
-        Write-Output "Ahmad    | $(sumPoengKortstokk -kortstokk $Ahmad) | $(KortstokkPrint -kortstokkJs $Ahmad)"
+        Write-Output "Frode    | $(sumPoengKortstokk -kortstokk $Frode) | $(KortstokkPrint -kortstokkJs $Frode)"
 }
 
 $blackjack = 21
@@ -111,60 +111,60 @@ $blackjack = 21
 
 
 # Draw a card if sum of existing cards are less than 17
-while ((sumPoengKortstokk -kortstokk $Ahmad) -lt 17) {
+while ((sumPoengKortstokk -kortstokk $Frode) -lt 17) {
     
-    $Ahmad += $kortstokkJson[0]
+    $Frode += $kortstokkJson[0]
     $kortstokkJson = $kortstokkJson[1..$kortstokkJson.length]
-    #Write-Host "My hand is $(KortstokkPrint($Ahmad))"
+    #Write-Host "My hand is $(KortstokkPrint($Frode))"
     #Write-Host "kortstokkJs is $(KortstokkPrint($kortstokkJson))"
 }
 
 
 
 
-#Write-Host "Kortstokk:  $(kortstokkPrint($Ahmad)) $(KortstokkPrint($Magnus))"
-#$kortihands = $Ahmad + $Magnus
+#Write-Host "Kortstokk:  $(kortstokkPrint($Frode)) $(KortstokkPrint($Magnus))"
+#$kortihands = $Frode + $Magnus
 #Write-Host "Poengsum:   $(sumPoengKortstokk $kortihands)"
 
-#Write-Host "Ahmad:  $(KortstokkPrint($Ahmad))"
+#Write-Host "Frode:  $(KortstokkPrint($Frode))"
 #Write-Host "Magnus:  $(KortstokkPrint($Magnus))"
 
-if ((sumPoengKortstokk -kortstokk $Ahmad) -gt $blackjack) {
-    resultsPrint -vinner "Magnus" -kortStokkMagnus $Magnus -kortStokkMeg $Ahmad
+if ((sumPoengKortstokk -kortstokk $Frode) -gt $blackjack) {
+    resultsPrint -vinner "Magnus" -kortStokkMagnus $Magnus -kortStokkMeg $Frode
     Write-Host "Kortstokk:  $(kortstokkPrint($kortstokkJson))"
     exit
 }
 
-while ((sumPoengKortstokk -kortstokk $Magnus) -le (sumPoengKortstokk -kortstokk $Ahmad)) {
+while ((sumPoengKortstokk -kortstokk $Magnus) -le (sumPoengKortstokk -kortstokk $Frode)) {
     $Magnus += $kortstokkJson[0]
     $kortstokkJson = $kortstokkJson[1..$kortstokkJson.length]
 }
 
 ### Magnus taper spillet dersom poengsummen er høyere enn 21
 if ((sumPoengKortstokk -kortstokk $Magnus) -gt 21) {
-    resultsPrint -vinner "Ahmad" -kortStokkMagnus $magnus -kortStokkMeg $Ahmad
+    resultsPrint -vinner "Frode" -kortStokkMagnus $magnus -kortStokkMeg $Frode
     Write-Host "Kortstokk:  $(kortstokkPrint($kortstokkJson))"
     exit
 }
 
 if ((sumPoengKortstokk -kortstokk $Magnus) -eq $blackjack) {
-    resultsPrint -vinner "Magnus" -kortStokkMagnus $Magnus -kortStokkMeg $Ahmad
+    resultsPrint -vinner "Magnus" -kortStokkMagnus $Magnus -kortStokkMeg $Frode
     Write-Host "Kortstokk:  $(kortstokkPrint($kortstokkJson))"
     exit
 }
-elseif ((sumPoengKortstokk -kortstokk $Ahmad) -eq $blackjack) {
-    resultsPrint -vinner "Ahmad" -kortStokkMagnus $Magnus -kortStokkMeg $Ahmad
+elseif ((sumPoengKortstokk -kortstokk $Frode) -eq $blackjack) {
+    resultsPrint -vinner "Frode" -kortStokkMagnus $Magnus -kortStokkMeg $Frode
     Write-Host "Kortstokk:  $(kortstokkPrint($kortstokkJson))"
     exit
 }
 elseif (((sumPoengKortstokk -kortstokk $Magnus) -eq $blackjack) -and
-        ((sumPoengKortstokk -kortstokk $Ahmad) -eq $blackjack)) {
-    resultsPrint -vinner "Draw" -kortStokkMagnus $Magnus -kortStokkMeg $Ahmad
+        ((sumPoengKortstokk -kortstokk $Frode) -eq $blackjack)) {
+    resultsPrint -vinner "Draw" -kortStokkMagnus $Magnus -kortStokkMeg $Frode
     Write-Host "Kortstokk:  $(kortstokkPrint($kortstokkJson))"
     exit
 }elseif (((sumPoengKortstokk -kortstokk $Magnus) -lt $blackjack) -and
-         ((sumPoengKortstokk -kortstokk $Ahmad) -lt $blackjack)) {
-    resultsPrint -vinner "undecided" -kortStokkMagnus $Magnus -kortStokkMeg $Ahmad
+         ((sumPoengKortstokk -kortstokk $Frode) -lt $blackjack)) {
+    resultsPrint -vinner "undecided" -kortStokkMagnus $Magnus -kortStokkMeg $Frode
     Write-Host "Kortstokk:  $(kortstokkPrint($kortstokkJson))"
      exit
 }
