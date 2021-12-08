@@ -1,0 +1,30 @@
+name: oppgave 17
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    defaults:
+      run:
+        shell: pwsh
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run Blackjack script file
+        run: ./src/oppgave_10ny.ps1
+
+        - name: Login via Az module
+          uses: azure/login@v1
+          with:
+           creds: ${{secrets.AZURE_CREDENTIALS }}
+           enable-AzPSSession: true
+          - name: Install and cache PowerShell modules
+            uses: potatoqualitee/psmodulecache@v4
+            with: 
+            modules-to-cache: Az.Storage, Az.Functions, Az.Websites, Az.Resources, Az.Accounts
+
+        - name: Deploy Function app
+          run: .src/funcApp/DeployWithBicep.ps1 -firstName 'Frode' -resourceGroupName 'frode-workshop-bn4v2mi34b4o6'
